@@ -48,6 +48,27 @@ class DatabaseController():
         except Exception as e:
             popup.ok_popup("Error", f"Failed to delete: {e}")
         
+    def update_subscription_service_id(self, old_service_id, old_service, new_service_id):
+        
+        try:
+            self.cursor.execute("UPDATE subscriptions SET service_id = ? WHERE service_id = ? AND service = ?",
+                                (int(new_service_id), old_service_id, old_service))
+            self.connection.commit()
+            return True
+        except Exception as e:
+            popup.ok_popup("Error", f"Failed to update service_id: {e}")
+            return False
+    def update_subscription_service(self, old_service_id, old_service, new_service):
+        try:
+            self.cursor.execute("UPDATE subscriptions SET service = ? WHERE service_id = ? AND service = ?",
+                                (new_service, old_service_id, old_service))
+            self.connection.commit()
+            return True
+        except Exception as e:
+            popup.ok_popup("Error", f"Failed to update service: {e}")
+            return False
+
+        
     def get_all_subscriptions(self):
         self.cursor.execute(f"SELECT * FROM {database_constants.USER_TABLE_NAME}")
         return self.cursor.fetchall()

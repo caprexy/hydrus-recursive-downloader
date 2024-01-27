@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QLineEdit, QWidget, QGridLayout, QPushButton, QLabel, QComboBox, QMessageBox
 from view import panel_interface
 from controller import input_panel_controller
+import constants
 
 class InputPanel(QWidget, panel_interface.panel):
     def __init__(self, parent=None):
@@ -18,11 +19,7 @@ class InputPanel(QWidget, panel_interface.panel):
         self.services_dropdown = QComboBox()
         self.layout.addWidget(self.services_dropdown, row, 0)
         
-        services = [
-            "patreon",
-            ""
-        ]
-        self.services_dropdown.addItems(services)
+        self.services_dropdown.addItems(constants.SERVICES)
         
         self.subscription_id_input = QLineEdit("Replace with numerical ID")
         self.layout.addWidget(self.subscription_id_input, row, 1)

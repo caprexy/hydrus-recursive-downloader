@@ -1,0 +1,4 @@
+SERVICES = [
+            "patreon",
+            "gumroad"
+        ]
